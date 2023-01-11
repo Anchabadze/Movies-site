@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addInput = addForm.querySelector('.adding__input'),
             checkbox = addForm.querySelector('[type="checkbox"]');
 
-    addForm.addEventListener('submit', (e) => { // 10:26
+    addForm.addEventListener('submit', (e) => { 
         e.preventDefault();
 
         let newFilm = addInput.value;
@@ -28,6 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (newFilm.length > 21) { 
                 newFilm = `${newFilm.substring(0, 22)}...`;
+            }
+
+            if (favorite) {
+                console.log('Adding your favorite movie');
             }
 
 
@@ -70,11 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         });
 
-        document.querySelectorAll('.delete').forEach((btn, i) => { /* выбираем элемент корзины .delete и сразу его перебираем с помощью forEach  */
+        document.querySelectorAll('.delete').forEach((btn, i) => {
             btn.addEventListener('click', () => {
                 btn.parentElement.remove();
                 movieDB.movies.splice(i, 1);
-                createMovieList(films, parent); // чтобы список заново пересобирался и нумерация не терялась
+                createMovieList(films, parent); 
             });
         });
 
