@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function createMovieList(films, parent) {
         parent.innerHTML = '';
 
+        sortArr(films);
+
         films.forEach((film, i) => {
             parent.innerHTML += `
                 <li class="promo__interactive-item">${i + 1} ${film}
@@ -67,11 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 </li>
             `;
         });
+
+        document.querySelectorAll('.delete').forEach((btn, i) => { /* выбираем элемент корзины .delete и сразу его перебираем с помощью forEach  */
+            btn.addEventListener('click', () => {
+                btn.parentElement.remove();
+                movieDB.movies.splice(i, 1);
+                createMovieList(films, parent); // чтобы список заново пересобирался и нумерация не терялась
+            });
+        });
+
     }
 
      deleteAdv(adv);
      makeChanges();
-     sortArr(movieDB.movies);
      createMovieList(movieDB.movies, movieList);
 
 });
