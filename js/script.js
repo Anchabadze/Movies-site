@@ -18,19 +18,25 @@ document.addEventListener('DOMContentLoaded', () => {
             addInput = addForm.querySelector('.adding__input'),
             checkbox = addForm.querySelector('[type="checkbox"]');
 
-    addForm.addEventListener('submit', (e) => { 
+    addForm.addEventListener('submit', (e) => { // 10:26
         e.preventDefault();
 
-        const newFilm = addInput.value;
+        let newFilm = addInput.value;
         const favorite = checkbox.checked;
 
         if (newFilm) {
+
+            if (newFilm.length > 21) { 
+                newFilm = `${newFilm.substring(0, 22)}...`;
+            }
+
+
             movieDB.movies.push(newFilm);
             sortArr(movieDB.movies);
     
             createMovieList(movieDB.movies, movieList);
         }
-        
+
         e.target.reset();
 
     });
